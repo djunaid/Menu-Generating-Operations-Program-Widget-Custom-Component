@@ -7,9 +7,11 @@ import "@servicenow/now-dropdown";
 import "@servicenow/now-input";
 import "./menu-editor";
 
+// File description: This is where to configure all the details about a menu item, such as its name, link, or delete
+
 const view = (
 	{
-		properties: { id, choice, label, type, page, sysId, href },
+		properties: { id, choice, label, type, page, sysId, href, expandParent },
 		labelInput,
 		typeInput,
 		pageInput,
@@ -108,7 +110,7 @@ const view = (
 				></now-dropdown>
 			</div>
 			<div className="rightMenu">
-				<menu-editor parent={id}></menu-editor>
+				<menu-editor parent={id} expandParent={expandParent}></menu-editor>
 				<now-collapse expanded={editMode}>
 					<div>
 						{typeValue == "route" ? (
@@ -199,6 +201,9 @@ createCustomElement("menu-item", {
 		href: {
 			default: undefined,
 		},
+		expandParent: {
+			default: undefined
+		}
 	},
 	// Keeps track of any changes made during editing
 	initialState: {
